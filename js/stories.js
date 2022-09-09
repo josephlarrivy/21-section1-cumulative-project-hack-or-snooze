@@ -53,3 +53,28 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+async function submitStory (e) {
+  e.preventDefault();
+  showClick();
+  const title = $('#create-title').val();
+  const author = $('#create-author').val();
+  const url = $('#create-url').val();
+  const username = currentUser.username;
+  const storyData = { title, author, url, username };
+  showClick();
+  const story = await storyList.addStory(currentUser, storyData);
+  showClick();
+  const $story = generateStoryMarkup(story);
+  $allStoriesList.prepend($story);
+
+
+
+  // hide the form and reset it
+  $submitForm.slideUp("slow");
+  $submitForm.trigger("reset");
+  
+
+}
+
+$submitForm.on('click', submitStory);

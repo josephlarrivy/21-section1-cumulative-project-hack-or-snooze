@@ -7,16 +7,10 @@
 
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
 
-/******************************************************************************
- * Story: a single story in the system
- */
-
+//Story: a single story in the system
 class Story {
-
-  /** Make instance of Story from data object about story:
-   *   - {title, author, url, username, storyId, createdAt}
-   */
-
+  //Make instance of Story from data object about story:
+    //{title, author, url, username, storyId, createdAt}
   constructor({ storyId, title, author, url, username, createdAt }) {
     this.storyId = storyId;
     this.title = title;
@@ -25,34 +19,24 @@ class Story {
     this.username = username;
     this.createdAt = createdAt;
   }
-
-  /** Parses hostname out of URL and returns it. */
-
+  //Parses hostname out of URL and returns it.
   getHostName() {
     return new URL(this.url).host;
   }
 }
 
-
-/******************************************************************************
- * List of Story instances: used by UI to show story lists in DOM.
- */
-
+//List of Story instances: used by UI to show story lists in DOM.
 class StoryList {
   constructor(stories) {
     this.stories = stories;
   }
-
   /** Generate a new StoryList. It:
-   *
    *  - calls the API
    *  - builds an array of Story instances
    *  - makes a single StoryList instance out of that
-   *  - returns the StoryList instance.
-   */
-
+   *  - returns the StoryList instance. */
   static async getStories() {
-    // Note presence of `static` keyword: this indicates that getStories is **not** an instance method. Rather, it is a method that is called on the class directly. Why doesn't it make sense for getStories to be aninstance method?
+    // Note presence of `static` keyword: this indicates that getStories is **not** an instance method. Rather, it is a method that is called on the class directly. Why doesn't it make sense for getStories to be an instance method?
 
     // query the /stories endpoint (no auth required)
     const response = await axios({
@@ -81,10 +65,14 @@ class StoryList {
       data: {token, story:{title,author,url}},
     });
     const story = new Story(response.data.story);
-    for (let str of story) {
-      this.stories.unshift(str);
-      user.ownStories.unshift(str);
-    }
+
+    this.stories.unshift(story);
+    user.ownStories.unshift(story);
+
+    // for (let str of story) {
+    //   this.stories.unshift(str);
+    //   user.ownStories.unshift(str);
+    //}
     return story;
 
   }

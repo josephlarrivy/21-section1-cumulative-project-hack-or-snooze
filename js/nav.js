@@ -3,6 +3,14 @@
 
 "use strict";
 
+
+
+function showClick () {
+  console.log('click');
+}
+
+
+
 /******************************************************************************
  * Handling navbar clicks and updating navbar
  */
@@ -37,3 +45,11 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+
+$navSubmit.on('click', function() {
+  hidePageComponents();
+  $allStoriesList.show();
+  $submitForm.show();
+  showClick();
+})
