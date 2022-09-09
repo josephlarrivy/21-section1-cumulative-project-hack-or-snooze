@@ -37,6 +37,18 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
+
+
+<!-- ---------my code -->
+  <div class="logged-in-nav hidden">
+    <a class="nav-link" href="#" id="nav-submit-story">Submit</a>
+    <a class="nav-link" href="#" id="nav-favorites">Favorites</a>
+    <a class="nav-link" href="#" id="nav-my-stories">My Stories</a>
+  </div>
+<!-- ---------my code -->
+
+
+
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
@@ -44,8 +56,41 @@
   </div>
 </nav>
 
+
+
+
+
+
+
+
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
+
+
+
+<!-- ---------my code -->
+  <form class="hidden" id="submit-form">
+
+    <label for="create-author">author</label>
+    <input id="create-author" placeholder="author" required>
+
+    <label for="create-title">title</label>
+    <input id="create-title" placeholder="title" required>
+
+    <label for="create-url">url:</label>
+    <input id="create-url" type="url" placeholder="url" required>
+
+    <button type="submit">Submit</button>
+
+  </form>
+<!-- ---------my code -->
+
+
+
+
+
+
+
 
   <!-- loading message (removed by JS after stories loaded) -->
   <div id="stories-loading-msg">Loading&hellip;</div>
@@ -54,6 +99,20 @@
   <ol id="all-stories-list" class="stories-list"></ol>
 
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Login and signup forms -->
 <section class="account-forms-container container">
@@ -93,7 +152,7 @@
       <input id="signup-password" autocomplete="new-password" type="password">
     </div>
     <button type="submit">create account</button>
-  </form>
+  </form> 
 </section>
 
 <!-- Library JS & our JS -->

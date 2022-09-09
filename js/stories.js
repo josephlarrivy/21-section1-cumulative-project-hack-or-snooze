@@ -1,3 +1,6 @@
+//contains code for UI about listing stories.
+
+
 "use strict";
 
 // This is the global list of the stories, an instance of StoryList

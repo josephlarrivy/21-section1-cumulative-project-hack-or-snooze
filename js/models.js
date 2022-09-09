@@ -1,3 +1,8 @@
+//contains classes to manage the data of the app and the connection to the API. The name models.js to describe a file containing these kinds of classes that focus on the data and logic about the data. UI stuff shouldn’t go here.
+
+
+
+
 "use strict";
 
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
@@ -24,8 +29,7 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
-    // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    return new URL(this.url).host;
   }
 }
 
@@ -48,10 +52,7 @@ class StoryList {
    */
 
   static async getStories() {
-    // Note presence of `static` keyword: this indicates that getStories is
-    //  **not** an instance method. Rather, it is a method that is called on the
-    //  class directly. Why doesn't it make sense for getStories to be an
-    //  instance method?
+    // Note presence of `static` keyword: this indicates that getStories is **not** an instance method. Rather, it is a method that is called on the class directly. Why doesn't it make sense for getStories to be aninstance method?
 
     // query the /stories endpoint (no auth required)
     const response = await axios({
@@ -73,8 +74,19 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
+  async addStory(user, {title,author,url}) {
+    const token = user.loginToken;
+    const response = await axios.post ({
+      url: `${BASE_URL}/stories`,
+      data: {token, story:{title,author,url}},
+    });
+    const story = new Story(response.data.story);
+    for (let str of story) {
+      this.stories.unshift(str);
+      user.ownStories.unshift(str);
+    }
+    return story;
+
   }
 }
 
