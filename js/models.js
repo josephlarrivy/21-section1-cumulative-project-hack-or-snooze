@@ -60,19 +60,21 @@ class StoryList {
 
   async addStory(user, {title,author,url}) {
     const token = user.loginToken;
-    const response = await axios.post ({
+    const response = await axios({
+      method: 'POST',
       url: `${BASE_URL}/stories`,
       data: {token, story:{title,author,url}},
     });
     const story = new Story(response.data.story);
 
-    this.stories.unshift(story);
-    user.ownStories.unshift(story);
-
     // for (let str of story) {
     //   this.stories.unshift(str);
     //   user.ownStories.unshift(str);
-    //}
+    // }
+
+    this.stories.unshift(story);
+    user.ownStories.unshift(story);
+
     return story;
 
   }
@@ -193,4 +195,25 @@ class User {
       return null;
     }
   }
+
+  //everything above this should be right
+
+
+  //add ability to favorite stories
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
