@@ -28,7 +28,7 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-        <input type='checkbox' id='favorite-toggle-${story.storyId}'>
+        <input type='checkbox'>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -111,4 +111,12 @@ async function toggleFavorites(e) {
   }
 }
 
-$storiesLists.on("click", toggleFavorites);
+const $checkbox = $(':checkbox');
+$checkbox.on("click", function() {
+  console.log('click');
+  toggleFavorites();
+  console.log(`${storyId}`);
+});
+
+
+const $allStoriesList = $("#all-stories-list");
